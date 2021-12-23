@@ -6,14 +6,15 @@
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_SurveyVIPFileName" Type="InArgument(x:String)" />
     <x:Property Name="in_SurveyTradFileName" Type="InArgument(x:String)" />
+    <x:Property Name="in_SurveyATMFileName" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>712,1300</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>712,1554</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ManipulatingBlackListTracking_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="56">
+    <scg:List x:TypeArguments="x:String" Capacity="30">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -80,11 +81,12 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ManipulatingBlackListTracking" sap:VirtualizedContainerService.HintSize="476,1235" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ManipulatingBlackListTracking" sap:VirtualizedContainerService.HintSize="476,1489" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="blackListTrackingDT" />
       <Variable x:TypeArguments="sd:DataTable" Name="tradeDT" />
       <Variable x:TypeArguments="sd:DataTable" Name="vipDT" />
+      <Variable x:TypeArguments="sd:DataTable" Name="atmDT" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -101,6 +103,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ReadRange>
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[atmDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="434,87" sap2010:WorkflowViewState.IdRef="ReadRange_4" SheetName="[in_Config(&quot;SurveyATMSheetName&quot;).ToString]" WorkbookPath="[&quot;Data\Temp\&quot;+in_SurveyATMFileName]" />
     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ClearExcelData workflow" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Framework\ClearExcelData.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="inFileName">["Data\Temp\"+in_BlackListFileName]</InArgument>
@@ -113,13 +116,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:ExcelApplicationScope Password="{x:Null}" CreateNewFile="False" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="434,506" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" Visible="False" WorkbookPath="[&quot;Data\Temp\&quot;+in_BlackListFileName]">
+    <ui:ExcelApplicationScope Password="{x:Null}" CreateNewFile="False" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="434,633" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" Visible="False" WorkbookPath="[&quot;Data\Temp\&quot;+in_BlackListFileName]">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,397" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,524" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -181,6 +184,7 @@ Select dr= dr.ItemArray
             </TryCatch>
             <ui:ExcelWriteRange AddHeaders="True" DataTable="[tradeDT.DefaultView.ToTable(True,&quot;fe_programacion&quot;,&quot;correo&quot;,&quot;cl_cine&quot;,&quot;marca&quot;)]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" SheetName="[in_Config(&quot;in_BlackListSheetName&quot;).ToString]" StartingCell="A1" />
             <ui:ExcelAppendRange DataTable="[vipDT.DefaultView.ToTable(True,&quot;fe_programacion&quot;,&quot;correo&quot;,&quot;cl_cine&quot;,&quot;marca&quot;)]" DisplayName="Append Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelAppendRange_1" SheetName="[in_Config(&quot;in_BlackListSheetName&quot;).ToString]" />
+            <ui:ExcelAppendRange DataTable="[atmDT.DefaultView.ToTable(True,&quot;fe_programacion&quot;,&quot;correo&quot;,&quot;cl_cine&quot;,&quot;marca&quot;)]" DisplayName="Append Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelAppendRange_2" SheetName="[in_Config(&quot;in_BlackListSheetName&quot;).ToString]" />
           </Sequence>
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>
