@@ -207,7 +207,7 @@
               <OutArgument x:TypeArguments="scg:List(s:DateTime)">[ThisWeekDateTime]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="scg:List(s:DateTime)">[Enumerable.Range(0,7).Select(function(x) Today.AddDays(x- today.DayOfWeek+1)).toList]</InArgument>
+              <InArgument x:TypeArguments="scg:List(s:DateTime)">[Enumerable.Range(0,7).Select(function(x) Today.AddDays(x- today.DayOfWeek+4)).toList]</InArgument>
             </Assign.Value>
           </Assign>
           <ui:FilterDataTable DataTable="[out_InputDataTable]" DisplayName="Filter Data Table- not this week data only" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="763,51" sap2010:WorkflowViewState.IdRef="FilterDataTable_9" OutputDataTable="[notThisWeekdata]" SelectColumnsMode="Keep">
