@@ -11,7 +11,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>900,1925</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>625,2449</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ManipulatingBlackListTracking_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="31">
@@ -82,7 +82,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ManipulatingBlackListTracking" sap:VirtualizedContainerService.HintSize="376,1860" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ManipulatingBlackListTracking" sap:VirtualizedContainerService.HintSize="376,2384" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="blackListTrackingDT" />
       <Variable x:TypeArguments="sd:DataTable" Name="tradeDT" />
@@ -97,7 +97,9 @@
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Working on blacklist file: &quot;+ in_BlackListFileName]" />
     <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[blacklistOrignalDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ReadRange_5" SheetName="[in_Config(&quot;in_BlackListSheetName&quot;).ToString]" WorkbookPath="[&quot;Data\Temp\&quot;+in_BlackListFileName]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Blacklist orignal row: &quot;+blacklistOrignalDT.Rows.Count.ToString]" />
     <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[vipDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="[in_Config(&quot;SurveyVipSheetName&quot;).ToString]" WorkbookPath="[&quot;Data\Temp\&quot;+in_SurveyVIPFileName]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;survey VIP data : &quot;+vipDT.Rows.Count.ToString]" />
     <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[tradeDT]" DisplayName="Read Trade DT" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="[in_Config(&quot;SurveyTradSheetName&quot;).ToString]" WorkbookPath="[&quot;Data\Temp\&quot;+in_SurveyTradFileName]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -106,7 +108,9 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ReadRange>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;survey trad data: &quot;+tradeDT.Rows.Count.ToString]" />
     <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[atmDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ReadRange_4" SheetName="[in_Config(&quot;SurveyATMSheetName&quot;).ToString]" WorkbookPath="[&quot;Data\Temp\&quot;+in_SurveyATMFileName]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;survey atm data: &quot;+atmDT.Rows.Count.ToString]" />
     <ui:KillProcess Process="{x:Null}" ContinueOnError="True" DisplayName="Kill Process" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="excel" />
     <ui:Delete ContinueOnError="True" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[&quot;Data\Temp\&quot;+in_BlackListFileName]" />
     <ui:WriteRange AddHeaders="True" DataTable="[blacklistOrignalDT.DefaultView.ToTable(True,&quot;fe_programacion&quot;,&quot;correo&quot;,&quot;cl_cine&quot;,&quot;marca&quot;)]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="[in_Config(&quot;in_BlackListSheetName&quot;).ToString]" StartingCell="A1" WorkbookPath="[&quot;Data\Temp\&quot;+in_BlackListFileName]" />
